@@ -8,8 +8,12 @@ Deno.serve((req) => {
   });
   socket.addEventListener("message", (event) => {
     if (event.data === "ping") {
-      socket.send("pong");
+      return socket.send("pong");
     }
+    if (event.data === "hello") {
+      return socket.send("world");
+    }
+    socket.send(`Unknown: ${event.data}`);
   });
   return response;
 });
